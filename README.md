@@ -1,10 +1,9 @@
 # Tetris Game made by using Amazon Q CLI.
 
-A visually enhanced Tetris game implementation using Pygame.
-
 ## Features
 
 - Classic Tetris gameplay with modern visuals
+- Start screen with game instructions
 - 3D-style block rendering with light and shadow effects
 - Ghost piece preview showing where the piece will land
 - Line clearing animations
@@ -14,6 +13,7 @@ A visually enhanced Tetris game implementation using Pygame.
 
 ## Controls
 
+- **S**: Start the game
 - **Left Arrow**: Move piece left
 - **Right Arrow**: Move piece right
 - **Down Arrow**: Move piece down (soft drop)
