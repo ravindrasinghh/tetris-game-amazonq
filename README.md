@@ -31,7 +31,6 @@
 ## How to Run
 
 ```bash
-cd 90
 python tetris.py
 ```
 
