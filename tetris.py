@@ -158,6 +158,9 @@ class TetrisGame:
         self.ghost_piece = None
         self.update_ghost_piece()
         
+        # Start screen flag
+        self.game_started = False
+        
         # Animation variables
         self.lines_to_clear = []
         self.clear_animation_time = 0
@@ -274,7 +277,7 @@ class TetrisGame:
         # Lock piece is called in move() when it can't move down anymore
 
     def update(self, dt):
-        if self.paused or self.game_over:
+        if not self.game_started or self.paused or self.game_over:
             return
             
         if self.is_animating:
@@ -291,6 +294,43 @@ class TetrisGame:
     def draw(self, screen):
         # Draw the background grid
         screen.blit(background, (0, 0))
+        
+        # If game hasn't started yet, show start screen
+        if not self.game_started:
+            # Semi-transparent overlay
+            overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
+            overlay.fill((0, 0, 0, 180))
+            screen.blit(overlay, (0, 0))
+            
+            # Draw title
+            title_text = title_font.render("TETRIS", True, WHITE)
+            text_width = title_text.get_width()
+            screen.blit(title_text, (SCREEN_WIDTH // 2 - text_width // 2, SCREEN_HEIGHT // 2 - 80))
+            
+            # Draw start instruction
+            start_text = font.render("Press S to Start", True, YELLOW)
+            text_width = start_text.get_width()
+            screen.blit(start_text, (SCREEN_WIDTH // 2 - text_width // 2, SCREEN_HEIGHT // 2))
+            
+            # Draw controls
+            controls_text = font.render("Controls:", True, WHITE)
+            text_width = controls_text.get_width()
+            screen.blit(controls_text, (SCREEN_WIDTH // 2 - text_width // 2, SCREEN_HEIGHT // 2 + 50))
+            
+            controls = [
+                "← → : Move",
+                "↑ : Rotate",
+                "↓ : Soft Drop",
+                "Space : Hard Drop",
+                "P : Pause"
+            ]
+            
+            for i, control in enumerate(controls):
+                ctrl_text = font.render(control, True, WHITE)
+                text_width = ctrl_text.get_width()
+                screen.blit(ctrl_text, (SCREEN_WIDTH // 2 - text_width // 2, SCREEN_HEIGHT // 2 + 80 + i * 25))
+                
+            return
         
         # Draw the ghost piece
         if self.ghost_piece and not self.game_over and not self.is_animating:
@@ -425,6 +465,8 @@ class TetrisGame:
 
     def reset(self):
         self.__init__()
+        # Keep the game in start screen mode when resetting
+        self.game_started = False
 
 def main():
     game = TetrisGame()
@@ -441,9 +483,15 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     running = False
                 
-                if game.game_over:
+                # Start screen controls
+                if not game.game_started:
+                    if event.key == pygame.K_s:
+                        game.game_started = True
+                # Game over controls
+                elif game.game_over:
                     if event.key == pygame.K_r:
                         game.reset()
+                # In-game controls
                 else:
                     if event.key == pygame.K_p:
                         game.paused = not game.paused
