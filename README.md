@@ -1,4 +1,4 @@
-# Enhanced Pygame Tetris
+# Tetris Game made by using Amazon Q CLI.
 
 A visually enhanced Tetris game implementation using Pygame.
 
