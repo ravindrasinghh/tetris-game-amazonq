@@ -36,11 +36,12 @@ SHAPES = [
     [[0, 1, 1], [1, 1, 0]],          # S
     [[1, 1, 0], [0, 1, 1]],          # Z
     [[1, 0, 0], [1, 1, 1]],          # J
-    [[0, 0, 1], [1, 1, 1]]           # L
+    [[0, 0, 1], [1, 1, 1]],           # L
+    [[0, 1], [0, 1], [1, 1]]         # Semicolon
 ]
 
 # Main colors for each piece
-COLORS = [CYAN, YELLOW, PURPLE, GREEN, RED, BLUE, ORANGE]
+COLORS = [CYAN, YELLOW, PURPLE, GREEN, RED, BLUE, ORANGE, GRAY]
 
 # Darker shade for 3D effect
 DARK_COLORS = [
@@ -50,7 +51,8 @@ DARK_COLORS = [
     (0, 180, 0),      # Dark Green
     (180, 0, 0),      # Dark Red
     (0, 0, 180),      # Dark Blue
-    (180, 120, 0)     # Dark Orange
+    (180, 120, 0),    # Dark Orange
+    DARK_GRAY         # Dark Gray
 ]
 
 # Lighter shade for 3D effect
@@ -61,7 +63,8 @@ LIGHT_COLORS = [
     (120, 255, 120),  # Light Green
     (255, 120, 120),  # Light Red
     (120, 120, 255),  # Light Blue
-    (255, 200, 120)   # Light Orange
+    (255, 200, 120),  # Light Orange
+    WHITE             # White
 ]
 
 # Set up the display
